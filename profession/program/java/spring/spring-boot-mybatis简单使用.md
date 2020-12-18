@@ -74,6 +74,7 @@ dependencies {
 &ensp;&ensp;&ensp;&ensp;配置文件的编写需要注意参数的配置，比如SSL那个一般要设置为false，driver-class-name也要注意一下，不要写错了，文件的大致内容如下：
 
 ```bash
+# gradle
 # mybatis的config文件位置配置
 mybatis.config-location=classpath:mybatis/mybatis-config.xml
 # 各个表的xml文件位置配置
@@ -89,6 +90,20 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 #springboot + mybatis设置将SQL语句打印到控制台
 logging.level.com.mall.MallWeb.mapper=debug
+```
+
+```java
+# maven
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.14</version>
+</dependency>
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.0.0</version>
+</dependency>
 ```
 
 ### 代码编写

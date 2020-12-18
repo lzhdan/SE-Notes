@@ -1,23 +1,4 @@
 ## 文档索引
-- extention
-    - book
-        - [Python高手之路.md](./extention/book/Python高手之路.md)
-        - [不惧孤独，不畏寂寞.md](./extention/book/不惧孤独，不畏寂寞.md)
-        - [倔金小册_redis深度历险.md](./extention/book/倔金小册_redis深度历险.md)
-        - [告白.md](./extention/book/告白.md)
-        - [效率证明能力.md](./extention/book/效率证明能力.md)
-        - [第一本docker书.md](./extention/book/第一本docker书.md)
-        - [重塑大脑，重塑人生.md](./extention/book/重塑大脑，重塑人生.md)
-        - [非暴力沟通.md](./extention/book/非暴力沟通.md)
-    - 得到
-        - [什么是强者的生活哲学.md](./extention/得到/什么是强者的生活哲学.md)
-        - [如何快速提升英语口语能力.md](./extention/得到/如何快速提升英语口语能力.md)
-        - [如何成为有效学习的高手-许岑.md](./extention/得到/如何成为有效学习的高手-许岑.md)
-        - [如何获得高效的睡眠,.md](./extention/得到/如何获得高效的睡眠,.md)
-        - [怎样成为精力管理的高手.md](./extention/得到/怎样成为精力管理的高手.md)
-        - [怎样让学校效率最高.md](./extention/得到/怎样让学校效率最高.md)
-        - [精英日课.md](./extention/得到/精英日课.md)
-    - [菜谱.md](./extention/菜谱.md)
 - profession
     - common
         - [2020面试知识总览.md](./profession/common/2020面试知识总览.md)
@@ -133,7 +114,8 @@
             - shardingsphere
                 - [shardingSphere-proxy主从读写.md](./profession/program/java/shardingsphere/shardingSphere-proxy主从读写.md)
                 - [shardingsphere-raw-jdbc.md](./profession/program/java/shardingsphere/shardingsphere-raw-jdbc.md)
-                - [ShardingSphere5JDBC-XA示例.md](./profession/program/java/shardingsphere/ShardingSphere5JDBC-XA示例.md)
+                - [ShardingSphere5JDBC-Atomikos-XA示例.md](./profession/program/java/shardingsphere/ShardingSphere5JDBC-Atomikos-XA示例.md)
+                - [ShardingSphere5JDBC-Narayana-XA示例.md](./profession/program/java/shardingsphere/ShardingSphere5JDBC-Narayana-XA示例.md)
                 - [ShardingSphereProxy分库分表.md](./profession/program/java/shardingsphere/ShardingSphereProxy分库分表.md)
             - spring
                 - [File与MultipartFile.md](./profession/program/java/spring/File与MultipartFile.md)
@@ -162,6 +144,9 @@
                 - [跨域设置.md](./profession/program/java/spring/跨域设置.md)
             - 专栏
                 - [小马哥讲Spring核心编程思想.md](./profession/program/java/专栏/小马哥讲Spring核心编程思想.md)
+            - 分布式事务
+                - [Seata-TCC-分布式事务代码示例.md](./profession/program/java/分布式事务/Seata-TCC-分布式事务代码示例.md)
+                - [分布式事务TCC大致原理.md](./profession/program/java/分布式事务/分布式事务TCC大致原理.md)
             - [图像相关.md](./profession/program/java/图像相关.md)
             - 基础
                 - [CSV.md](./profession/program/java/基础/CSV.md)

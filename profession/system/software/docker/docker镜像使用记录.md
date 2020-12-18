@@ -28,5 +28,8 @@ docker run -dit --name mq -p 61616:61616 -p 8161:8161 rmohr/activemq
 admin admin
 user user
 
+### zookeeper
+docker run -dit --name zk -p 2181:2181 zookeeper
+
 ## 参考链接
 - [mysql](https://hub.docker.com/_/mysql)

@@ -264,3 +264,7 @@ terni setting file
 - [2020 鼠标指针还不换一换？](https://zhuanlan.zhihu.com/p/128678357)
 - [Task switcher and launcher, used to replace ALT+TAB and WIN+R.](https://github.com/Answeror/lit)
 - [Visual Studio 2017 设置透明背景图](https://www.cnblogs.com/stulzq/p/9393323.html)
+
+### 备用软件
+- [Mouse without Borders for Mac](https://www.sharemouse.com/mouse-without-borders-mac/)
+- [多台电脑共用鼠标键盘（局域网内）](https://blog.csdn.net/leo062701/article/details/80771340)

@@ -51,3 +51,25 @@ public class HelloController {
 使用浏览器访问：http://localhost:8080/
 
 将看到返回字符：Hello World！
+
+## 其他相关技巧
+### 关闭 Tomact
+方法一：配置文件
+
+```xml
+spring:
+    main:allow-bean-definition-overriding: true
+    web-application-type: none
+```
+
+方法二、主函数设置
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(xxx.class)
+            .web(WebApplicationType.NONE)
+            .run(args);
+    }
+}
+```
