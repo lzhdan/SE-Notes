@@ -7,18 +7,18 @@
 
 
 ```java
-    <repositories>
-		<repository>
-			<id>spring</id>
-			<url>https://maven.aliyun.com/repository/spring</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories> 
+<repositories>
+	<repository>
+		<id>spring</id>
+		<url>https://maven.aliyun.com/repository/spring</url>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+	</repository>
+</repositories> 
 ```
 
 - setting.xml
