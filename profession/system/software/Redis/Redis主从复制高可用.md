@@ -127,3 +127,4 @@ docker exec -ti redis1 redis-sentinel /etc/setinel.conf
 - [Docker Official Images](https://hub.docker.com/_/redis?tab=description&page=1&ordering=last_updated)
 - [六、Redis 主从复制 Replicaof、哨兵 Sentinel](https://blog.csdn.net/huanghuitan/article/details/108044983)
 - [redis cluster集群模式原理](https://juejin.cn/post/6844903984294002701)
+- [Windows下部署redis主从、哨兵（sentinel）、集群（cluster）](https://blog.csdn.net/baidu_27627251/article/details/112143714)
