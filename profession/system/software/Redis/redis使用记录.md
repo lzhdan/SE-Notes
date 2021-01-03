@@ -20,6 +20,8 @@ bind 0.0.0.0
 ### Docker
 ```sh
 docker run -dit --name redis -p 6379:6379 redis
+
+docker exec -ti redis redis-cli shutdown
 ```
 
 ## 设置
