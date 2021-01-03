@@ -97,6 +97,22 @@ repl_backlog_histlen:140
 
 
 ### 配置 Sentinel 哨兵
+&ensp;&ensp;&ensp;&ensp;sentinel配置文件如下：
+
+```shell
+port 16381
+daemonize no
+pidfile /var/run/redis-sentinel.pid
+logfile ""
+dir /tmp
+sentinel monitor mymaster 192.168.101.104 6381 2
+sentinel down-after-milliseconds mymaster 10000
+sentinel failover-timeout mymaster 30000
+sentinel parallel-syncs mymaster 1
+```
+
+&ensp;&ensp;&ensp;&ensp;命令运行记录如下：
+
 ```shell
 docker cp entinel.conf redis1:/etc/setinel.conf
 
@@ -106,3 +122,8 @@ docker exec -ti redis1 redis-sentinel /etc/setinel.conf
 44:X 03 Jan 2021 06:39:16.512 * +slave slave 172.17.0.1:6379 172.17.0.1 6379 @ mymaster 192.168.101.104 6381
 44:X 03 Jan 2021 06:39:26.666 * +convert-to-slave slave 172.17.0.1:6379 172.17.0.1 6379 @ mymaster 192.168.101.104 6381
 ```
+
+## 参考链接
+- [Docker Official Images](https://hub.docker.com/_/redis?tab=description&page=1&ordering=last_updated)
+- [六、Redis 主从复制 Replicaof、哨兵 Sentinel](https://blog.csdn.net/huanghuitan/article/details/108044983)
+- [redis cluster集群模式原理](https://juejin.cn/post/6844903984294002701)
