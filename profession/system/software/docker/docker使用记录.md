@@ -84,6 +84,7 @@ docker load < /tmp/new-image.tar
 docker inspect --format='{{.NetworkSettings.IPAddress}}' mongo
 
 ### 映射连接问题
+docker toolbox/desktop 使用上有些区别，特别是 toolbox 需要用启动时的 IP
 地址不对,可能不是onlyhost模式,使用下面的地址即可
 docker-machine ip default
 
