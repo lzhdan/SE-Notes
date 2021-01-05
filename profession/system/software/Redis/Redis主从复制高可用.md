@@ -3,6 +3,8 @@
 ## 简介
 &ensp;&ensp;&ensp;&ensp;使用docker配置Redis主从复制，配置 sentinel 实现高可用，一主两从
 
+*这里就写一个大概，比较好的，可以参考后面的链接，进行更详细，完整的设置*
+
 ## 配置记录
 ### Redis主从复制
 &ensp;&ensp;&ensp;&ensp;准备配置文件，分别启动启动在6380/6381/6382,6380为主
@@ -128,3 +130,4 @@ docker exec -ti redis1 redis-sentinel /etc/sentinel.conf
 - [六、Redis 主从复制 Replicaof、哨兵 Sentinel](https://blog.csdn.net/huanghuitan/article/details/108044983)
 - [redis cluster集群模式原理](https://juejin.cn/post/6844903984294002701)
 - [Windows下部署redis主从、哨兵（sentinel）、集群（cluster）](https://blog.csdn.net/baidu_27627251/article/details/112143714)
+- [配置 redis 的主从复制，sentinel 高可用，Cluster 集群](https://github.com/Johar77/JAVA-000/tree/main/Week_12)
