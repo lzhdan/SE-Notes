@@ -1,56 +1,6 @@
-# Spring Cloud Gateway （七）处理流程
+# Spring Cloud Gateway (八) 定制化filter的配置加载
 ***
-## 简介
-&ensp;&ensp;&ensp;&ensp;初步梳理 Spring Cloud Gateway 的处理流程
-
-### 过程记录
-#### 主要请求流程
-&ensp;&ensp;&ensp;&ensp;在前面的分析中，我们知道在 RoutePredicateHandlerMapping 中是实现了路由查找，于是在这个类中 getHandlerInternal 函数打上断点，通过调用栈向前追溯调用
-
-&ensp;&ensp;&ensp;&ensp;向前我们追溯到了 DispatcherHandler ,在这个断点处通过断点调试发现有类似循环的操作，这个感觉是查找相应 handler 进行处理，细节部分暂时不够，后面再来详细看
-
-```java
-    public Mono<Void> handle(ServerWebExchange exchange) {
-        return this.handlerMappings == null ? this.createNotFoundError() : Flux.fromIterable(this.handlerMappings).concatMap((mapping) -> {
-            return mapping.getHandler(exchange);
-        }).next().switchIfEmpty(this.createNotFoundError()).flatMap((handler) -> {
-            return this.invokeHandler(exchange, handler);
-        }).flatMap((result) -> {
-            return this.handleResult(exchange, result);
-        });
-    }
-```
-
-&ensp;&ensp;&ensp;&ensp;在上面函数打断点，再通过调用栈向前查找，找到 netty 相关的一个类： HttpServerHandle 。下面的函数中有类似 Mono 这里的代码，感觉就是发布东西到后面的 DispatcherHandler ,但具体传递路径目前还没有搞清楚
-
-```java
-    public void onStateChange(Connection connection, State newState) {
-        if (newState == HttpServerState.REQUEST_RECEIVED) {
-            try {
-                if (log.isDebugEnabled()) {
-                    log.debug(ReactorNetty.format(connection.channel(), "Handler is being applied: {}"), new Object[]{this.handler});
-                }
-
-                HttpServerOperations ops = (HttpServerOperations)connection;
-                // Mono 发布
-                Mono.fromDirect((Publisher)this.handler.apply(ops, ops)).subscribe(ops.disposeSubscriber());
-            } catch (Throwable var4) {
-                log.error(ReactorNetty.format(connection.channel(), ""), var4);
-                connection.channel().close();
-            }
-        }
-    }
-```
-
-&ensp;&ensp;&ensp;&ensp;结合前面的分析，那处理流程设计的类基本如下：
-
-- HttpServerHandle : netty 的服务端，接收客户端请求
-- DispatcherHandler : 请求调度器，负责请求分发
-- FilteringWebHandler : 使用 filter 链表处理请求的 WebHandler
-- Filter : 一系列的操作， WebsocketRoutingFilter/NettyRoutingFilter 负责请求到后台服务器并接受请求， NettyWriteResponseFilter 返回响应到客户端
-
-
-#### 定制化filter的来源
+### 定制化filter的来源
 &ensp;&ensp;&ensp;&ensp;非 global filter 从 routeLocator 中获取的，跟踪 routeLocator 看其的来源
 
 ```java
