@@ -1,4 +1,4 @@
-# Spring Cloud Gateway (八) 定制化filter的配置加载
+# Spring Cloud Gateway (八) 定制化filter的配置
 ***
 ### 定制化filter的来源
 &ensp;&ensp;&ensp;&ensp;非 global filter 从 routeLocator 中获取的，跟踪 routeLocator 看其的来源
@@ -7,36 +7,14 @@
     protected Mono<Route> lookupRoute(ServerWebExchange exchange) {
         // routeLocator 跟踪堆栈发现是 CachingRouteLocator
 		return this.routeLocator.getRoutes()
-				// individually filter routes so that filterWhen error delaying is not a
-				// problem
 				.concatMap(route -> Mono.just(route).filterWhen(r -> {
-					// add the current route we are testing
-					exchange.getAttributes().put(GATEWAY_PREDICATE_ROUTE_ATTR, r.getId());
-					return r.getPredicate().apply(exchange);
+                    ......
 				})
-						// instead of immediately stopping main flux due to error, log and
-						// swallow it
-						.doOnError(e -> logger.error(
-								"Error applying predicate for route: " + route.getId(),
-								e))
-						.onErrorResume(e -> Mono.empty()))
-				// .defaultIfEmpty() put a static Route not found
-				// or .switchIfEmpty()
-				// .switchIfEmpty(Mono.<Route>empty().log("noroute"))
 				.next()
-				// TODO: error handling
+                    ......
 				.map(route -> {
-					if (logger.isDebugEnabled()) {
-						logger.debug("Route matched: " + route.getId());
-					}
-					validateRoute(route, exchange);
-					return route;
+                    ......
 				});
-
-		/*
-		 * TODO: trace logging if (logger.isTraceEnabled()) {
-		 * logger.trace("RouteDefinition did not match: " + routeDefinition.getId()); }
-		 */
 	}
 ```
 
@@ -74,3 +52,37 @@
 ```
 
 &ensp;&ensp;&ensp;&ensp;跟踪 CompositeRouteLocator 发现是初始化加载就初始化好了，大致流程是知道，细节后面再看，因为这部分属于加载了，后面分析这部分的时候再分析
+
+&ensp;&ensp;&ensp;&ensp;下面回头来看route的匹配，在下面的一段代码中，好像是相关匹配功能的
+
+```java
+    protected Mono<Route> lookupRoute(ServerWebExchange exchange) {
+		return this.routeLocator.getRoutes()
+                // filterWhen 是返回的 true 和 false ，应该是起过滤的作用，但它后面的逻辑没有搞懂，不知道具体是怎么匹配的
+				.concatMap(route -> Mono.just(route).filterWhen(r -> {
+					exchange.getAttributes().put(GATEWAY_PREDICATE_ROUTE_ATTR, r.getId());
+					return r.getPredicate().apply(exchange);
+				})
+						.doOnError(e -> logger.error(
+								"Error applying predicate for route: " + route.getId(),
+								e))
+						.onErrorResume(e -> Mono.empty()))
+				.next()
+				.map(route -> {
+					if (logger.isDebugEnabled()) {
+						logger.debug("Route matched: " + route.getId());
+					}
+					validateRoute(route, exchange);
+					return route;
+				});
+	}
+```
+
+&ensp;&ensp;&ensp;&ensp;跟踪调用栈来到下面这段代码，可以看到返回的bool，但具体是怎么匹配的，没有搞懂
+
+```java
+		public Publisher<Boolean> apply(T t) {
+			return Mono.from(left.apply(t)).flatMap(
+					result -> !result ? Mono.just(false) : Mono.from(right.apply(t)));
+		}
+```
