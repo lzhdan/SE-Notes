@@ -1,6 +1,9 @@
-# Java Kafka
+# Java Kafka 简单示例
 ***
-## 示例代码
+## 简介
+&ensp;&ensp;&ensp;&ensp;Java kafka 简单代码示例
+
+### maven依赖配置
 ```java
 <!-- kafka -->
 <dependency>
@@ -10,11 +13,8 @@
 </dependency>
 ```
 
+### kakfa生产和消费者生成
 ```java
-package util;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -23,10 +23,14 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.*;
 
+/**
+ * @author lw1243925457
+ */
 public class KafkaUtil {
-    public static KafkaConsumer<String, String> createConsumer(String topic) {
+
+    public static KafkaConsumer<String, String> createConsumer(String servers, String topic) {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", PropertiesLoader.get("kafka.host"));
+        properties.put("bootstrap.servers", servers);
         properties.put("group.id", "group-1");
         properties.put("enable.auto.commit", "false");
         properties.put("auto.commit.interval.ms", "1000");
@@ -40,20 +44,20 @@ public class KafkaUtil {
         return kafkaConsumer;
     }
 
-    public static List<Map> readMessage(KafkaConsumer<String, String> kafkaConsumer, int timeout) {
-        List<Map> result = new ArrayList<Map>();
-        ConsumerRecords<String, String> records = kafkaConsumer.poll(timeout);
-        for (ConsumerRecord<String, String> record : records) {
-            String value = record.value();
-            kafkaConsumer.commitAsync();
-            result.add((Map) new Gson().fromJson(value, new TypeToken<HashMap>() {}.getType()));
+    public static void readMessage(KafkaConsumer<String, String> kafkaConsumer, int timeout) {
+        while (true) {
+            ConsumerRecords<String, String> records = kafkaConsumer.poll(timeout);
+            for (ConsumerRecord<String, String> record : records) {
+                String value = record.value();
+                kafkaConsumer.commitAsync();
+                System.out.println(value);
+            }
         }
-        return result;
     }
 
-    public static KafkaProducer<String, String> createProducer() {
+    public static KafkaProducer<String, String> createProducer(String servers) {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", PropertiesLoader.get("kafka.host"));
+        properties.put("bootstrap.servers", servers);
         properties.put("acks", "all");
         properties.put("retries", 0);
         properties.put("batch.size", 16384);
@@ -66,6 +70,25 @@ public class KafkaUtil {
 
     public static void send(KafkaProducer<String, String> producer, String topic, String message) {
         producer.send(new ProducerRecord<String, String>(topic, message));
+    }
+}
+```
+
+### 运行
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        String servers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "TestTopic";
+        String message = "test";
+
+        KafkaProducer<String, String> producer = KafkaUtil.createProducer(servers);
+        KafkaUtil.send(producer, topic, message);
+
+        KafkaConsumer<String, String> consumer = KafkaUtil.createConsumer(servers, topic);
+        KafkaUtil.readMessage(consumer, 100);
     }
 }
 ```
