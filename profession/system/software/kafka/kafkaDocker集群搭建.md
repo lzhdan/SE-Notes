@@ -63,6 +63,15 @@ docker exec -ti kafka0 kafka-producer-perf-test.sh --topic TestTopic --num-recor
 docker exec -ti kafka0 kafka-consumer-perf-test.sh --bootstrap-server 192.168.101.104:9092 --topic TestTopic --fetch-size 1048576 --messages 100000 --threads 1
 ```
 
+### kafka manage
+&ensp;&ensp;&ensp;&ensp;使用docker启动后，访问: http://localhost:9000/ , 点击添加cluster，输入前两个（名称和zk地址），保存即可
+
+```shell script
+docker run -dit -p 9000:9000 -e ZK_HOSTS="192.168.101.104:2181" hlebalbau/kafka-manager:stable
+
+http://localhost:9000/
+```
+
 ## 参考链接
 - [【Kafka精进系列003】Docker环境下搭建Kafka集群](https://blog.csdn.net/noaman_wgs/article/details/103757791)
 - [kafka如何彻底删除topic及数据](https://blog.csdn.net/belalds/article/details/80575751)
