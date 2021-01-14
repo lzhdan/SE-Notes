@@ -4,6 +4,7 @@
 &ensp;&ensp;&ensp;&ensp;基于上篇：[Soul 源码阅读（二）代码初步运行]()的配置，这次debug下请求处理的大致路径,验证网关模型的路径
 
 ### 详细流程记录
+#### 查看运行日志，寻找切入点
 &ensp;&ensp;&ensp;&ensp;上篇中我们配置了 Divide 插件，让 http://localhost:9195 ,转发到了后台服务器 http://localhost:8082 上，首先不打断点运行，查看运行日志，找一个切入点：
 
 ```shell script
@@ -32,6 +33,7 @@ o.d.s.plugin.httpclient.WebClientPlugin  : The request urlPath is http://localho
         }
 ```
 
+#### 跟踪调用栈
 &ensp;&ensp;&ensp;&ensp;再次往前看调用栈，发送 SoulWebHandler 调用了 SoulWebHandler 的 execute
 
 ```java
@@ -247,6 +249,7 @@ public Mono<Void> handle(ServerWebExchange exchange) {
 - SoulWebHandler ：plugins调用链
 - DividePlugin ：plugin具体处理
 
+#### 逐步debug相关细节
 &ensp;&ensp;&ensp;&ensp;这个时候参考网关模型，发现路由匹配之类的没有看到，没办法，细节部分没有清楚的就是: SoulWebHandler ,它的plugin调用的部分没有细看，于是我们进行如下的函数的debug，进入各个函数的调用（进入subscribe之类的时候就跳出来，点击进入下一个断点，IDEA debug左上角的箭头）
 
 ```java
@@ -400,6 +403,72 @@ DubboResponsePlugin : true
     }
 ```
 
-&ensp;&ensp;&ensp;&ensp;经过一通调试，发现好像Soul 是有可能 filter 相关的操作在前面，但好像 filter 在前，感觉也可以
+&ensp;&ensp;&ensp;&ensp;经过一通调试，感觉 DividePlugin 、WebClientPlugin 、 WebClientResponsePlugin 非常的可疑，我们取消所有的断点，然后对他们三个打上断点进行调试
 
-&ensp;&ensp;&ensp;&ensp;今天太困了，明天继续验证今天调试时的想法
+&ensp;&ensp;&ensp;&ensp;首先对 DividePlugin 进行测试，我们发送一个没有配置的请求 http://localhost:9195/get ,发送后一路debug下来，发现返回结果如下：
+
+```json
+{
+    "code": -107,
+    "message": "Can not find selector, please check your configuration!",
+    "data": null
+}
+```
+
+&ensp;&ensp;&ensp;&ensp;符合我们的预期，我们看下相关的代码，后面还测试了配置不正确的，发现都会进入下面的调用函数：
+
+```java
+    public static Mono<Void> result(final ServerWebExchange exchange, final Object result) {
+        exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        // 这个exchange.getResponse().writeWith 很前面看到基本一样，可以猜测soul里面估计都是这样返回响应的
+        return exchange.getResponse().writeWith(Mono.just(exchange.getResponse()
+                .bufferFactory().wrap(Objects.requireNonNull(JsonUtils.toJson(result)).getBytes())));
+    }
+```
+
+&ensp;&ensp;&ensp;&ensp;继续测试正确的请求，WebClientPlugin 经过上面的分析和根据函数大致代码判断，handleRequestBody 发送请求，doNext 可以收到请求结果，我们在 doNext上打上断点，发现果然在后台服务端收到了请求（自己写的netty服务，并打印日志），验证我们这里是请求发送的猜想
+
+&ensp;&ensp;&ensp;&ensp;WebClientResponsePlugin 我们在 execute 函数打上断点，调试的时候注意到，进入了两次，一次是 chain.execute(exchange)，一次是后面的then，这个有点像lamda表达式（也可以类比为vue的请求），而且then是等所有 plugin 都运行以后才执行，执行完以后进客户端就得到了结果
+
+&ensp;&ensp;&ensp;&ensp;具体的发送逻辑还没有看懂，但不影响这次的处理流程解析。再debug的时候还有一个不断循环调用的地方，我们回过头来去看一下它，看看有什么分析疏漏没
+
+&ensp;&ensp;&ensp;&ensp;在类： DefaultWebFilterChain 中有这么一点循环调用，代码如下：
+
+```java
+    public Mono<Void> filter(ServerWebExchange exchange) {
+        return Mono.defer(() -> {
+            return this.currentFilter != null && this.chain != null ? this.invokeFilter(this.currentFilter, this.chain, exchange) : this.handler.handle(exchange);
+        });
+    }
+```
+
+&ensp;&ensp;&ensp;&ensp;我们查看其相关类有下面几个，进入相应的类看了看，大致如下：
+
+- MetricsWebFilter : 没看懂
+- HealthFilter : 感觉类似监控检查，可以直接方法，因为是本地的；"/actuator/health", "/health_check"，尝试了下确实不走后面的处理逻辑，直接返回了
+- FileSizeFilter ：文件上传大小限制？MediaType.MULTIPART_FORM_DATA.isCompatibleWith(mediaType)
+- WebSocketParamFilter ：不太清楚其功能
+- HiddenHttpMethodFilter ：看到好像没有啥逻辑代码
+
+&ensp;&ensp;&ensp;&ensp;得到了健康检查之类的直接在 HealthFilter 中返回，文件上传大小限制功能也在 filter 中，其他的不太清楚，但不影响大局
+
+### 总结
+&ensp;&ensp;&ensp;&ensp;经过总结梳理，得到下面的初步处理流程概览：
+
+![](./picture/Soulprocessfirst.png)
+
+- HttpServerOperations : 明显的netty的请求接收的地方，请求入口
+- ReactorHttpHandlerAdapter ：生成response和request
+- HttpWebHandlerAdapter ：exchange 的生成
+- FilteringWebHandler : filter 操作
+- SoulWebHandler ：plugins调用链
+
+&ensp;&ensp;&ensp;&ensp;请求由netty收到后，来到Filter，这里进行一些处理：健康检查，文件大小检查等待，然后来到核心的 plugins，这里有三个部分的plugin需要注意（自己给它分的，初步猜测）：
+
+- 前置处理：这里的 plugin 都会进行匹配，感觉就是针对配置后的url进行认证、黑名单、限流、降级、熔断等操作
+- 请求发送：这里对HTTP、websocket、rpc、文件上传（这个是猜测）这四种请求进行处理，发送到后端服务器
+- 响应返回：这里就两种响应，HTTP和rpc，拿到后返回给客户端
+
+&ensp;&ensp;&ensp;&ensp;可以看到plugins非常的核心，关键功能都是在这里实现的，其中 divide plugin 好像扮演了路由匹配的角色，在Soul中就没有明显单独的路由匹配
+
+&ensp;&ensp;&ensp;&ensp;请求和响应的处理也是在 plugins 进行处理的
