@@ -268,22 +268,22 @@ public Mono<Void> handle(ServerWebExchange exchange) {
         }
 ```
 
-&ensp;&ensp;&ensp;&ensp;我们逐步调试上面的那个函数，查看变量： plugins，内容大致如下，后面false和true是变量 skip。发现是true就不执行，看函数也能大致猜的到
+&ensp;&ensp;&ensp;&ensp;我们逐步调试上面的那个函数，查看变量： plugins，内容大致如下，后面false和true是变量 skip。发现是true就不执行，看函数也能大致猜的到,各个插件的skip情况如下：
 
-GlobalPlugin : false
-SignPlugin : false
-WafPlugin: false
-RateLimiterPlugin : false
-HystrixPlugin : false
-Resilience4JPlugin : false
-DividePlugin : false
-WebClientPulugin : false
-WebsocketPlugin : true
-BodyParamPlugin : false
-AlibabaDubblePlugin : true
-MonitorPlugin : false
-WebClientResponsePlugin : false
-DubboResponsePlugin : true
+- GlobalPlugin : false
+- SignPlugin : false
+- WafPlugin: false
+- RateLimiterPlugin : false
+- HystrixPlugin : false
+- Resilience4JPlugin : false
+- DividePlugin : false
+- WebClientPulugin : false
+- WebsocketPlugin : true
+- BodyParamPlugin : false
+- AlibabaDubblePlugin : true
+- MonitorPlugin : false
+- WebClientResponsePlugin : false
+- DubboResponsePlugin : true
 
 &ensp;&ensp;&ensp;&ensp;调试的时候跟着进去，进去以后一步一步的走即可
 

@@ -10,26 +10,43 @@
 - 遇到sock之类的错误，删文件，在重启后再重启
 
 ## Neo4j
+```shell script
 docker run -dit --name neo4j -p 7474:7474 -p 7687:7687 --env=NEO4J_AUTH=none neo4j:3.5.13
+```
 
 ## Redis
+```shell script
 docker run -dit --name redis -p 6379:6379 redis
+```
 
 ## MongoDB
+```shell script
 docker run -dit --name mongo -p 27017:27017 mongo
+```
 
 ## Nginx
+```shell script
 docker run -dit --name nginx -p 80:80 -v D:/temp/nginx.conf:/etc/nginx/nginx.conf nginx
+```
 
 ## docker-activemq
-docker run -dit --name mq -p 11616:61616 -p 8161:8161 rmohr/activemq
+```shell script
+docker run -dit --name activemq -p 11616:61616 -p 8161:8161 -p 1883:1883 rmohr/activemq
+```
 
 初始账号：
 admin admin
 user user
 
+## docker rabbitmq
+```shell script
+docker run -dit --name rabbitmq -p 5672:5672 rabbitmq
+```
+
 ### zookeeper
+```shell script
 docker run -dit --name zk -p 2181:2181 zookeeper
+```
 
 ## 参考链接
 - [mysql](https://hub.docker.com/_/mysql)
