@@ -277,7 +277,7 @@ public Mono<Void> handle(ServerWebExchange exchange) {
 - HystrixPlugin : false
 - Resilience4JPlugin : false
 - DividePlugin : false
-- WebClientPulugin : false
+- WebClientPlugin : false
 - WebsocketPlugin : true
 - BodyParamPlugin : false
 - AlibabaDubblePlugin : true
