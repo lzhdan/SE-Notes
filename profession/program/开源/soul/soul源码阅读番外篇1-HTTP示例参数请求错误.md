@@ -347,6 +347,7 @@ exchange.getAttributes().put(Constants.REWRITE_URI
         SoulContext soulContext = new SoulContext();
         String path = request.getURI().getPath();
         soulContext.setPath(path);
+        // 还可以从metadata入手，这里就从类型判断入手
         if (Objects.nonNull(metaData) && metaData.getEnabled()) {
             if (RpcTypeEnum.SPRING_CLOUD.getName().equals(metaData.getRpcType())) {
                 setSoulContextByHttp(soulContext, path);
@@ -380,6 +381,9 @@ exchange.getAttributes().put(Constants.REWRITE_URI
 ```
 
 &ensp;&ensp;&ensp;&ensp;到这，我们成功的定位并修复了这个错误（虽然没有啥用，但开心啊）
+
+&ensp;&ensp;&ensp;&ensp;这个bug的修复还可以从if (Objects.nonNull(metaData) && metaData.getEnabled()) 这端逻辑入手，需要跟踪一下metadata，这里就不展开讲，搞的话又是一篇番外
+
 
 ## 总结
 &ensp;&ensp;&ensp;&ensp;本篇文章中对Soul网关2.2.1版本中HTTP请求出现404的错误进行了详细的分析
