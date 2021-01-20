@@ -235,7 +235,7 @@ exchange.getAttributes().put(Constants.REWRITE_URI
 
 &ensp;&ensp;&ensp;&ensp;我们在这个函数上打上断点，然而非常不幸的是，也没有进入。瞬间头上？？？？？？？，这是怎么肥事啊，都没设置
 
-&ensp;&ensp;&ensp;&ensp;不抛弃不放弃，咋继续。看到realURL是从path来的，我们继续往上追求其来源，发现调用的是同一个类的下面这个函数 transform ,再上一层是 build
+&ensp;&ensp;&ensp;&ensp;不抛弃不放弃，咱继续。看到realURL是从path来的，我们继续往上追求其来源，发现调用的是同一个类的下面这个函数 transform ,再上一层是 build
 
 ```java
     # DefaultSoulContextBuilder
