@@ -49,7 +49,7 @@ o.d.s.w.configuration.SoulConfiguration  : load plugin:[response] [org.dromara.s
     }
 ```
 
-&ensp;&ensp;&ensp;&ensp;经过探索和老哥的讨论，发现是每天起用sofa的相关依赖
+&ensp;&ensp;&ensp;&ensp;经过探索和老哥的讨论，发现是没有起用sofa的相关依赖
 
 &ensp;&ensp;&ensp;&ensp;我们在Bootstrap的pom.xml文件中添加下面的依赖，然后重启
 
