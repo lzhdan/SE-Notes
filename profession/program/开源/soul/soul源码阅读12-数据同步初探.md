@@ -237,6 +237,6 @@ public class CommonPluginDataSubscriber implements PluginDataSubscriber {
 - [Soul网关源码阅读（十一）请求处理小结](https://juejin.cn/post/6920596034171174925)
 - [Soul网关源码阅读（十二）数据同步初探](https://juejin.cn/post/6920596173925384206)
 - [Soul网关源码阅读（十三）Websocket同步数据-Bootstrap端](https://juejin.cn/post/6920596028505178125)
-- [Soul网关源码阅读（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983))
+- [Soul网关源码阅读（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983)
 
 - [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)
