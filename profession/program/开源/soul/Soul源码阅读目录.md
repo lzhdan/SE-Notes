@@ -21,6 +21,7 @@
 - [Soul网关源码阅读（十七）Nacos数据同步解析-Bootstrap端](https://juejin.cn/post/6921325882753695757/)
 - [Soul网关源码阅读（十八）Zookeeper数据同步初探-Admin端](https://juejin.cn/post/6921495273122463751/)
 - [Soul网关源码阅读（十九）Nacos数据同步初始化修复-Admin端](https://juejin.cn/post/6921621915995996168/)
+- [Soul网关源码阅读（二十）Websocket数据同步-Admin端]()
 
 - [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)
 
