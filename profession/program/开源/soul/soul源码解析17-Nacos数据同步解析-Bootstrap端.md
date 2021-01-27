@@ -1,4 +1,4 @@
-# Soul网关源码阅读（十七）Nacos数据同步解析-Bootstrap端
+# Soul网关源码解析（十七）Nacos数据同步解析-Bootstrap端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;基于上篇：[Soul网关源码阅读（十五）Zookeeper数据同步-Bootstrap端](https://juejin.cn/post/6920764643967238151)，这篇我们要研究下Nacos数据同步原理

@@ -1,4 +1,4 @@
-# Soul网关源码阅读（十四）HTTP数据同步-Bootstrap端
+# Soul网关源码解析（十四）HTTP数据同步-Bootstrap端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章来研究下Soul网关Bootstrap端的HTTP数据同步，看看和上篇的Websocket数据同步区别大不大

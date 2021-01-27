@@ -1,4 +1,4 @@
-# Soul网关源码阅读（十八）Zookeeper数据同步初探-Admin端
+# Soul网关源码解析（十八）Zookeeper数据同步初探-Admin端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章来初步探索下Soul-Admin端Zookeeper如何初始化数据、处理更新数据的流程

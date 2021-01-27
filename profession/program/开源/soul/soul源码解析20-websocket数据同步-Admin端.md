@@ -1,4 +1,4 @@
-# Soul网关源码阅读（二十）Websocket数据同步-Admin端
+# Soul网关源码解析（二十）Websocket数据同步-Admin端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章探索下Soul网关Admin的Websocket数据同步流程
@@ -8,9 +8,9 @@
 
 &ensp;&ensp;&ensp;&ensp;根据前面Zookeeper和Nacos数据同步分析的经验，找到Websocket的事件监听处理的类，在其上打上断点，调试查看初始化流程
 
-&ensp;&ensp;&ensp;&ensp;然后在Admin后面修改插件状态，调试查看数据变更处理流程
+&ensp;&ensp;&ensp;&ensp;然后在Admin后台修改插件状态，调试查看数据变更处理流程
 
-&ensp;&ensp;&ensp;&ensp;发现初始化都是从属性的syncAll开始，而事件变更都是从Controllers入口开始的，具体详情记录情况源码Debug环节
+&ensp;&ensp;&ensp;&ensp;发现初始化都是从熟悉的syncAll开始，而事件变更处理都是从Controllers入口开始的，具体详情记录情况在源码Debug环节
 
 ## 示例运行
 &ensp;&ensp;&ensp;&ensp;启动数据库：
@@ -19,7 +19,7 @@
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
 ```
 
-&ensp;&ensp;&ensp;&ensp;首先配置运行Soul-Admin
+&ensp;&ensp;&ensp;&ensp;首先配置运行Soul-Admin，设置数据同步方式为Websocket
 
 ```xml
 soul:
@@ -41,8 +41,8 @@ soul :
 &ensp;&ensp;&ensp;&ensp;运行Soul-Example-HTTP，注册一些数据用于Debug测试
 
 ## 源码Debug
-### 初始化
-&ensp;&ensp;&ensp;&ensp;首先根据前面的经验再Soul-Admin模块，listener -- websocket 目录包下找到相应的Websocket事件监听处理类：WebsocketDataChangedListener
+### 初始化流程
+&ensp;&ensp;&ensp;&ensp;首先根据前面的经验在Soul-Admin模块，listener.websocket 目录包下找到相应的Websocket事件监听处理类：WebsocketDataChangedListener
 
 &ensp;&ensp;&ensp;&ensp;我们找到插件变更处理的函数，在其上打上端口，重启Admin
 
@@ -62,7 +62,7 @@ public class WebsocketDataChangedListener implements DataChangedListener {
 
 &ensp;&ensp;&ensp;&ensp;PS：这个有个小细节，如果没有任何一台Bootstrap或者事件发送，那这个断点不会进入
 
-&ensp;&ensp;&ensp;&ensp;我们跟踪调用栈来到前面文章中属性的事件处理分发，这里继续跟下去
+&ensp;&ensp;&ensp;&ensp;我们跟踪调用栈来到前面文章中熟悉的事件处理分发，这里继续跟下去
 
 ```java
 public class DataChangedEventDispatcher implements ApplicationListener<DataChangedEvent>, InitializingBean {
@@ -116,9 +116,9 @@ public class SyncDataServiceImpl implements SyncDataService {
 }
 ```
 
-&ensp;&ensp;&ensp;&ensp;再跟，来到了Websocket相关的，下面这个函数如果是写Websocket的，那一定非常熟悉了，就是接收到消息，然后调用处理逻辑
+&ensp;&ensp;&ensp;&ensp;再跟，来到了Websocket相关的，下面这个函数如果是写过Websocket的，那一定非常熟悉了，就是接收到消息，然后调用处理逻辑
 
-&ensp;&ensp;&ensp;&ensp;在调试中，我们看到message的值是MYSELF，所有Websocket的初始化通信约定应该是收到MYSELF，则同步全量数据给Bootstrap
+&ensp;&ensp;&ensp;&ensp;在调试中，我们看到message的值是MYSELF，猜测Websocket的初始化通信约定应该是收到MYSELF，则同步全量数据给Bootstrap
 
 ```java
 public class WebsocketCollector {

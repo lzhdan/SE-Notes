@@ -1,4 +1,4 @@
-# Soul网关源码阅读（十九）Nacos数据同步初始化修复-Admin端
+# Soul网关源码解析（十九）Nacos数据同步初始化修复-Admin端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章记录一次Nacos数据同步解析中发现问题，并提交PR，成功合并，解决Soul-Admin的Nacos数据同步初始化问题

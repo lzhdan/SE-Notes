@@ -1,4 +1,4 @@
-# Soul网关源码阅读（十五）Zookeeper数据同步-Bootstrap端
+# Soul网关源码解析（十五）Zookeeper数据同步-Bootstrap端
 ***
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章对Soul网关Bootstrap的Zookeeper数据同步进行探索
