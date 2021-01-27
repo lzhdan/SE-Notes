@@ -3,7 +3,7 @@
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本篇文章来探索Soul网关Admin中的HTTP长轮询数据同步流程
 
-## 概率
+## 概览
 &ensp;&ensp;&ensp;&ensp;运行示例参考：[Soul网关源码解析（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983)
 
 &ensp;&ensp;&ensp;&ensp;文章分析切入点为上面第十四篇中分析得到的两个请求接口：
