@@ -19,9 +19,7 @@
 
 &ensp;&ensp;&ensp;&ensp;推荐的同步方式是Zookeeper和Websocket，他们都是增量数据更新的
 
-&ensp;&ensp;&ensp;&ensp;HTTP是全量更新的
-
-&ensp;&ensp;&ensp;&ensp;Nacos在Bootstrap端看着是增量更新的，但在Admin端，每次都是需要全量的数据刷新更新
+&ensp;&ensp;&ensp;&ensp;HTTP、Nacos是全量更新的
 
 ### Admin端数据同步
 &ensp;&ensp;&ensp;&ensp;Admin端的数据同步套路基本一致，都是通过事件发布进行的
@@ -38,4 +36,4 @@
 
 &ensp;&ensp;&ensp;&ensp;初始化启动时都是拉取的全量数据进行本地缓存刷新
 
-&ensp;&ensp;&ensp;&ensp;Zookeeper、Nacos、Websocket看起来都是增量数据更新，HTTP是全量数据更新
+&ensp;&ensp;&ensp;&ensp;Zookeeper、Websocket都是增量数据更新，HTTP、Nacos是全量数据更新
