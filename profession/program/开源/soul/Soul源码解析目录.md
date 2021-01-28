@@ -32,7 +32,7 @@
 
 #### Soul-Client模块
 - [Soul网关源码解析（二十三）SoulSpringMvcClient注解](https://juejin.cn/post/6922643958455599111)
-- [Soul网关源码解析（二十四）SoulDubboClient注解]()
+- [Soul网关源码解析（二十四）SoulDubboClient注解](https://juejin.cn/post/6922722161702469640/)
 
 #### 番外
 - [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)

@@ -73,12 +73,12 @@ public class ApacheDubboServiceBeanPostProcessor implements ApplicationListener<
 }
 ```
 
-### 如何判断是否需要注册
+### 判断是否需要注册
 &ensp;&ensp;&ensp;&ensp;我们直接来到具体处理的handler函数
 
-&ensp;&ensp;&ensp;&ensp;可以看到其直接从bean获取到类信息，而且如果是发射代理类的，要获取到原来被代理的类（这里有些奇怪，为啥不能直接使用代理类，是方法生成后有什么不同吗？后面去探索一下）
+&ensp;&ensp;&ensp;&ensp;可以看到其直接从bean获取到类信息，而且如果是发射代理类的话，要获取到原来被代理的类（这里有些奇怪，为啥不能直接使用代理类，是方法生成后有什么不同吗？后面去探索一下）
 
-&ensp;&ensp;&ensp;&ensp;这里没有看到像HTTP那样的通配符了，Dubbo好像不能这样，这个感觉是个值得注意的点，感觉统配的话在从URL转Dubbo的路径的时候不好转，所有没有提供这方面的机制
+&ensp;&ensp;&ensp;&ensp;这里没有看到像HTTP那样的通配符了，Dubbo好像不能这样，这个感觉是个值得注意的点，感觉通配的话在从URL转Dubbo的路径的时候不好转，所有没有提供这方面的机制
 
 &ensp;&ensp;&ensp;&ensp;最后遍历类中的所有方法，如果有SoulDubboClient注解，将其接口注入到Admin中
 
@@ -217,3 +217,41 @@ public class ApacheDubboServiceBeanPostProcessor implements ApplicationListener<
 - 3.注册信息：
   - HTTP没有中间层，所有必须要有额外的IP和端口信息
   - Dubbo有Zookeeper中间层，Boostrap有个Dubbo客户端，通过Zookeeper能得到后台信息，就没有传入额外的IP和端口信息
+
+&ensp;&ensp;&ensp;&ensp;最后留一个疑问：为啥不能使用发射代理进行注册？
+
+## Soul网关源码解析文章列表
+### 掘金
+#### 了解与初步运行
+- [Soul网关源码解析（一） 概览](https://juejin.cn/post/6917864624423436296)
+- [Soul网关源码解析（二）代码初步运行](https://juejin.cn/post/6917865804121767944)
+
+#### 请求处理流程解析
+- [Soul网关源码解析（三）请求处理概览](https://juejin.cn/post/6917866538712334343)
+- [Soul网关源码解析（四）Dubbo请求概览](https://juejin.cn/post/6917867369909977102)
+- [Soul网关源码解析（五）请求类型探索](https://juejin.cn/post/6918575905962983438)
+- [Soul网关源码解析（六）Sofa请求处理概览](https://juejin.cn/post/6918736260467015693)
+- [Soul网关源码解析（七）限流插件初探](https://juejin.cn/post/6919348164944232455/)
+- [Soul网关源码解析（八）路由匹配初探](https://juejin.cn/post/6919774553241550855/)
+- [Soul网关源码解析（九）插件配置加载初探](https://juejin.cn/post/6920074307590684685/)
+- [Soul网关源码解析（十）自定义简单插件编写](https://juejin.cn/post/6920142348617777166)
+- [Soul网关源码解析（十一）请求处理小结](https://juejin.cn/post/6920596034171174925)
+
+#### 数据同步解析
+- [Soul网关源码解析（十二）数据同步初探](https://juejin.cn/post/6920596173925384206)
+- [Soul网关源码解析（十三）Websocket同步数据-Bootstrap端](https://juejin.cn/post/6920596028505178125)
+- [Soul网关源码解析（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983)
+- [Soul网关源码解析（十五）Zookeeper数据同步-Bootstrap端](https://juejin.cn/post/6920764643967238151)
+- [Soul网关源码解析（十六）Nacos数据同步示例运行](https://juejin.cn/post/6921170233868845064)
+- [Soul网关源码解析（十七）Nacos数据同步解析-Bootstrap端](https://juejin.cn/post/6921325882753695757/)
+- [Soul网关源码解析（十八）Zookeeper数据同步初探-Admin端](https://juejin.cn/post/6921495273122463751/)
+- [Soul网关源码解析（十九）Nacos数据同步初始化修复-Admin端](https://juejin.cn/post/6921621915995996168/)
+- [Soul网关源码解析（二十）Websocket数据同步-Admin端](https://juejin.cn/post/6921988280187617287/)
+- [Soul网关源码解析（二十一）HTTP长轮询数据同步-Admin端](https://juejin.cn/post/6922301585288593416/)
+- [Soul网关源码解析（二十二）数据同步小结](https://juejin.cn/post/6922584596810825735/)
+
+#### Soul-Client模块
+- [Soul网关源码解析（二十三）SoulSpringMvcClient注解](https://juejin.cn/post/6922643958455599111)
+
+#### 番外
+- [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)
