@@ -22,4 +22,4 @@
 
 &ensp;&ensp;&ensp;&ensp;整个Soul网关的学习过程中的思维导图如下：
 
-![](./picture/soulMindMap.png)
+![](./picture/soulMaidMap.png)
