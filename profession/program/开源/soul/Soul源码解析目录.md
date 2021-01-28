@@ -2,8 +2,11 @@
 ***
 ## Soul网关源码解析文章列表
 ### 掘金
+#### 了解与初步运行
 - [Soul网关源码解析（一） 概览](https://juejin.cn/post/6917864624423436296)
 - [Soul网关源码解析（二）代码初步运行](https://juejin.cn/post/6917865804121767944)
+
+#### 请求处理流程解析
 - [Soul网关源码解析（三）请求处理概览](https://juejin.cn/post/6917866538712334343)
 - [Soul网关源码解析（四）Dubbo请求概览](https://juejin.cn/post/6917867369909977102)
 - [Soul网关源码解析（五）请求类型探索](https://juejin.cn/post/6918575905962983438)
@@ -13,6 +16,8 @@
 - [Soul网关源码解析（九）插件配置加载初探](https://juejin.cn/post/6920074307590684685/)
 - [Soul网关源码解析（十）自定义简单插件编写](https://juejin.cn/post/6920142348617777166)
 - [Soul网关源码解析（十一）请求处理小结](https://juejin.cn/post/6920596034171174925)
+
+#### 数据同步解析
 - [Soul网关源码解析（十二）数据同步初探](https://juejin.cn/post/6920596173925384206)
 - [Soul网关源码解析（十三）Websocket同步数据-Bootstrap端](https://juejin.cn/post/6920596028505178125)
 - [Soul网关源码解析（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983)
@@ -25,4 +30,9 @@
 - [Soul网关源码解析（二十一）HTTP长轮询数据同步-Admin端](https://juejin.cn/post/6922301585288593416/)
 - [Soul网关源码解析（二十二）数据同步小结](https://juejin.cn/post/6922584596810825735/)
 
+#### Soul-Client模块
+- [Soul网关源码解析（二十三）SoulSpringMvcClient注解](https://juejin.cn/post/6922643958455599111)
+- [Soul网关源码解析（二十四）SoulDubboClient注解]()
+
+#### 番外
 - [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)
