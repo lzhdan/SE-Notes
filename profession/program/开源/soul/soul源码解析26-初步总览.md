@@ -11,7 +11,7 @@
 &ensp;&ensp;&ensp;&ensp;可以分为三大模块：
 
 - Soul-Bootstrap:网关核心，进行请求处理
-- Soul-Admin：网关配置中心，进行路由等主机的配置保存，给Soul-Bootstrap的Plugins提供数据支持（动态路由等等）
+- Soul-Admin：网关配置中心，进行路由等主要的配置保存，给Soul-Bootstrap的Plugins提供数据支持（动态路由等等）
 - Soul-Admin：实现自动路由配置，向Soul-Admin自动注册路由信息
 
 &ensp;&ensp;&ensp;&ensp;Soul-Bootstrap和Soul-Admin都是可以集群配置的 
