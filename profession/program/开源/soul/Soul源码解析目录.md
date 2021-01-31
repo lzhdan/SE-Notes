@@ -1,6 +1,8 @@
 # Soul网关源码解析目录
 ***
 ## Soul网关源码解析文章列表
+&ensp;&ensp;&ensp;&ensp;对用Java写的高性能网关：[Soul](https://github.com/dromara/soul),进行一波学习和研究，下面是相关的文章记录
+
 ### 掘金
 #### 了解与初步运行
 - [Soul网关源码解析（一） 概览](https://juejin.cn/post/6917864624423436296)

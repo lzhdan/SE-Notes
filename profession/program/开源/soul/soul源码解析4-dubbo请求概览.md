@@ -3,6 +3,11 @@
 ## 简介
 &ensp;&ensp;&ensp;&ensp;本次启动一个dubbo服务示例，初步探索Soul网关源码的Dubbo请求处理流程
 
+## 概览
+&ensp;&ensp;&ensp;&ensp;接着上篇：[Soul网关源码解析（三）请求处理概览](https://juejin.cn/post/6917866538712334343)
+
+&ensp;&ensp;&ensp;&ensp;我们来看一下Dubbo请求的代理转发和HTTP的有什么不一样的地方；经历了那些类；进行了那些操作
+
 ## 示例运行
 ### 环境配置
 &ensp;&ensp;&ensp;&ensp;在Soul源码clone下来以后，有一个 soul-example 目录，这个就是示例工程，里面有很多的示例可以运行
@@ -11,7 +16,7 @@
 
 &ensp;&ensp;&ensp;&ensp;我们选择运行：soul-examples --> soul-examples-apache-dubbo-service
 
-&ensp;&ensp;&ensp;&ensp;此次示例需要mysql和zookeeper，我们使用docker启动一下,记得修改 soul-admin 的数据库配置，其他的都不需要懂，猜测zk有默认配置
+&ensp;&ensp;&ensp;&ensp;此次示例需要mysql和zookeeper，我们使用docker启动一下,记得修改 soul-admin 的数据库配置，其他的都不需要动，猜测zk有默认配置
 
 ```shell script
 docker run -dit --name zk -p 2181:2181 zookeepe
@@ -19,7 +24,7 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:late
 ```
 
 ### 测试运行
-&ensp;&ensp;&ensp;&ensp;然后运行 Soul-admin、Soul-bootstrap,可以参考：[Soul 源码阅读（二）代码初步运行](https://github.com/lw1243925457/SE-Notes/blob/master/profession/program/%E5%BC%80%E6%BA%90/soul/soul%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-%E5%88%9D%E6%AD%A5%E8%BF%90%E8%A1%8C.md)
+&ensp;&ensp;&ensp;&ensp;然后运行 Soul-admin、Soul-bootstrap,可以参考：[Soul网关源码解析（二）代码初步运行](https://juejin.cn/post/6917865804121767944)
 
 &ensp;&ensp;&ensp;&ensp;运行soul-examples-apache-dubbo-service
 
@@ -268,7 +273,43 @@ o.d.s.p.a.d.c.ApplicationConfigCache     : init aliaba dubbo reference success t
 
 &ensp;&ensp;&ensp;&ensp;上面这些问题就留待以后分析了，慢慢来才能可持续发展
 
-## Soul网关源码分析文章列表
-- [Soul 源码阅读（一） 概览](https://github.com/lw1243925457/SE-Notes/blob/master/profession/program/%E5%BC%80%E6%BA%90/soul/soul%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1-%E6%A6%82%E8%A7%88.md)
-- [Soul 源码阅读（二）代码初步运行](https://github.com/lw1243925457/SE-Notes/blob/master/profession/program/%E5%BC%80%E6%BA%90/soul/soul%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-%E5%88%9D%E6%AD%A5%E8%BF%90%E8%A1%8C.md)
-- [Soul 源码阅读（三）HTTP请求处理概览](https://github.com/lw1243925457/SE-Notes/blob/master/profession/program/%E5%BC%80%E6%BA%90/soul/soul%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB3-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88.md)
+## Soul网关源码解析文章列表
+### 掘金
+#### 了解与初步运行
+- [Soul网关源码解析（一） 概览](https://juejin.cn/post/6917864624423436296)
+- [Soul网关源码解析（二）代码初步运行](https://juejin.cn/post/6917865804121767944)
+
+#### 请求处理流程解析
+- [Soul网关源码解析（三）请求处理概览](https://juejin.cn/post/6917866538712334343)
+- [Soul网关源码解析（四）Dubbo请求概览](https://juejin.cn/post/6917867369909977102)
+- [Soul网关源码解析（五）请求类型探索](https://juejin.cn/post/6918575905962983438)
+- [Soul网关源码解析（六）Sofa请求处理概览](https://juejin.cn/post/6918736260467015693)
+- [Soul网关源码解析（七）限流插件初探](https://juejin.cn/post/6919348164944232455/)
+- [Soul网关源码解析（八）路由匹配初探](https://juejin.cn/post/6919774553241550855/)
+- [Soul网关源码解析（九）插件配置加载初探](https://juejin.cn/post/6920074307590684685/)
+- [Soul网关源码解析（十）自定义简单插件编写](https://juejin.cn/post/6920142348617777166)
+- [Soul网关源码解析（十一）请求处理小结](https://juejin.cn/post/6920596034171174925)
+
+#### 数据同步解析
+- [Soul网关源码解析（十二）数据同步初探](https://juejin.cn/post/6920596173925384206)
+- [Soul网关源码解析（十三）Websocket同步数据-Bootstrap端](https://juejin.cn/post/6920596028505178125)
+- [Soul网关源码解析（十四）HTTP数据同步-Bootstrap端](https://juejin.cn/post/6920597298674302983)
+- [Soul网关源码解析（十五）Zookeeper数据同步-Bootstrap端](https://juejin.cn/post/6920764643967238151)
+- [Soul网关源码解析（十六）Nacos数据同步示例运行](https://juejin.cn/post/6921170233868845064)
+- [Soul网关源码解析（十七）Nacos数据同步解析-Bootstrap端](https://juejin.cn/post/6921325882753695757/)
+- [Soul网关源码解析（十八）Zookeeper数据同步初探-Admin端](https://juejin.cn/post/6921495273122463751/)
+- [Soul网关源码解析（十九）Nacos数据同步初始化修复-Admin端](https://juejin.cn/post/6921621915995996168/)
+- [Soul网关源码解析（二十）Websocket数据同步-Admin端](https://juejin.cn/post/6921988280187617287/)
+- [Soul网关源码解析（二十一）HTTP长轮询数据同步-Admin端](https://juejin.cn/post/6922301585288593416/)
+- [Soul网关源码解析（二十二）数据同步小结](https://juejin.cn/post/6922584596810825735/)
+
+#### Soul-Client模块
+- [Soul网关源码解析（二十三）SoulSpringMvcClient注解](https://juejin.cn/post/6922643958455599111)
+- [Soul网关源码解析（二十四）SoulDubboClient注解](https://juejin.cn/post/6922722161702469640/)
+- [Soul网关源码解析（二十五）Soul-Client模块小结](https://juejin.cn/post/6922745260435046408/)
+
+#### 总览
+- [Soul网关源码解析（二十六）初步总览](https://juejin.cn/post/6922960265663217678/)
+
+#### 番外
+- [Soul网关源码阅读番外篇（一） HTTP参数请求错误](https://juejin.cn/post/6918947689564471309)
