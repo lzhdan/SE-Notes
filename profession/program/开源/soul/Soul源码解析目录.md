@@ -37,6 +37,9 @@
 - [Soul网关源码解析（二十四）SoulDubboClient注解](https://juejin.cn/post/6922722161702469640/)
 - [Soul网关源码解析（二十五）Soul-Client模块小结](https://juejin.cn/post/6922745260435046408/)
 
+#### 服务注册与监听
+- [Soul网关源码解析（二十七）服务注册与下线]()
+
 #### 总览
 - [Soul网关源码解析（二十六）初步总览](https://juejin.cn/post/6922960265663217678/)
 

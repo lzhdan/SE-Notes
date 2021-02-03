@@ -98,7 +98,7 @@ mybatis.mapper-locations=classpath:mybatis/mapper/*.xml
 mybatis.type-aliases-package=com.neo.model
 
 # 数据库连接信息配置，自行更换数据库，用户名和密码
-spring.datasource.url=jdbc:mysql://localhost:3306/mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=falseallowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://localhost:3306/mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
 spring.datasource.username=root
 spring.datasource.password=root
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
