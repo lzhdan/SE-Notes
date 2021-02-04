@@ -38,12 +38,18 @@
 
 ```sh
 # oper powershell, check version,need 7, download url: https://github.com/PowerShell/PowerShell/releases/tag/v7.0.3
+# 查看
 $PSVersionTable
 
-Install-Module posh-git -Scope CurrentUser # posh-git
-Install-Module oh-my-posh -Scope CurrentUser # oh-my-posh
-Install-Module -Name PSReadLine -AllowPrerelease -Force # PSReadLine
+# 运行下面的命令，进项相应的安装，最好开着代理安装，不然可能会失败
+# posh-git
+Install-Module posh-git -Scope CurrentUser 
+# oh-my-posh
+Install-Module oh-my-posh -Scope CurrentUser 
+# PSReadLine
+Install-Module -Name PSReadLine -AllowPrerelease -Force 
 
+# 编辑文件，填入下面的内容
 notepad.exe $Profile
 
 # write content to file
@@ -93,6 +99,7 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 ```
 
+# 在win terminal 菜单选择设置，进入文件进行编辑
 terni setting file
 
 ```sh
