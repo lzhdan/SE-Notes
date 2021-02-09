@@ -8,7 +8,7 @@
 - Git for Windows:程序员不用Git是不行的，官网下载最新版本：[https://git-scm.com/download/win](https://git-scm.com/download/Windows)
 - Cmder：CMD美化，必备：[https://segmentfault.com/a/1190000008607196](https://segmentfault.com/a/1190000008607196)
 - windows terminal：官方商店免费，感觉很好了
-- VSCode:很好用的编辑器了，写写文档不错，完美解题sublime
+- VSCode:很好用的编辑器了，写写文档不错，完美接替sublime
 - [嗨格式阅读器](https://link.zhihu.com/?target=https%3A//dl-next.aunbox.cn/channel%3Fchannel%3D8fe352b2)
 
 ### 备用软件
