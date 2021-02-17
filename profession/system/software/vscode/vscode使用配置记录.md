@@ -23,6 +23,7 @@ _配置完后大致样子如下_
 - Prettier - Code formatter：Prettier 是一个代码格式化工具，只关注格式化，但不具备校验功能。
 - indent-rainbow：突出显示代码缩进
 - Code Spell Checker：单词拼写错误检查
+- docs-markdown : Markdown补全
 
 ### 字体
 
@@ -78,3 +79,7 @@ _配置完后大致样子如下_
 - [JanDeDobbeleer/oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh?WT.mc_id=-blog-scottha#installation)
 - [第一次使用VS Code时你应该知道的一切配置](https://zhuanlan.zhihu.com/p/62913725)
 - [如何实现Github markdown 目录/页内跳转？](https://www.zhihu.com/question/58630229/answer/191984051)
+
+
+- [免费好用的全平台 Markdown 编辑器，你可以自己「做」一个](https://sspai.com/post/53327)
+- [第一次使用VS Code时你应该知道的一切配置](https://zhuanlan.zhihu.com/p/62913725)
